@@ -1,0 +1,10 @@
+div(class="ui menu")
+    
+    if user && user.length !== 0
+        div(class="item")
+                a(class="ui red button", href="/signout") Sign Out
+    else 
+        div(class="item")
+            a(class="ui primary button", href="/signup") Sign Up 
+        div(class="item")
+            a(class="ui button", href="/signin") Sign In

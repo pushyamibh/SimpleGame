@@ -1,0 +1,21 @@
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/semantic.min.css')
+        script(src="/jquery-3.6.3.min.js")
+        script(src="/semantic.min.js")
+        script(src="/socket.io.min.js")
+
+        block additionalHead
+    body
+        div(class="ui container")
+            block navbar
+
+            if message
+                div(class="ui message")
+                    div(class="header")
+                        message= message
+
+            block content
+    
+    footer

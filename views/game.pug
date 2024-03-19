@@ -1,0 +1,61 @@
+extends layout.pug 
+
+
+block additionalHead
+    link(rel='stylesheet', href='/css/game.css')
+
+block navbar
+    include navbar.pug
+
+block content 
+    div(class="gameContainer")
+        if game
+            div 
+                h2(class="header")="Checkers"
+            if game.end
+                div(id="endMessage")
+                    h3(class="ui header")="Game Over!"
+                    p #{game.winner.username} won!
+
+                div(class="ui middle aligned center aligned grid")
+                    h3 Last 10 Moves
+                    table(class="ui celled table")
+                        thead 
+                            tr
+                                th Player
+                                th move 
+                                th time 
+                        tbody
+                            each move in game.history.slice(game.history.length - 10, game.history.length)
+                                tr
+                                    td= game.players[0]._id.toString() === move.player ? "White" : "Black"
+                                    td= JSON.stringify(move.move) === JSON.stringify(null) ? "Timeout" : JSON.stringify(move.move)
+                                    //- td= `From x: ${move.move[0].x}, y: ${move.move[0].y} to x: ${move.move[1].x}, y: ${move.move[1].y}`
+                                    td= 100 - move.timeRemaining
+                            
+                                
+            else
+                if game.turn && game.turn.toString() == user.toString()
+                    div(id="turnMessage")
+                        h3(class="ui header")="It's your turn!"
+                else
+                    div(id="turnMessage")
+                        h3(class="ui header")="It's your opponent's turn!"
+                div(class="ui equal width grid")
+                    div(class="message column")
+                        p(id="whiteScore") | White: #{game.playersScore[0]} 
+                        p(id="blackScore") | Black: #{game.playersScore[1]}
+                        
+                    div(class="message column", id="displayMessage")
+                        p | you're playing as #{game.players.findIndex(p => (p._id.toString() === user.toString())) === 0 ? 'White' : 'Black'}
+                        p | *White goes first
+                div(id="gameBoard", class="gameBoard")
+        else
+            div(class="ui middle aligned center aligned grid")
+                div(class="column")
+                    h2(class="ui teal header") No Game Found
+    
+    script(nonce=nonceForScript). 
+        let gameObject = !{JSON.stringify(game)};
+        let player = !{JSON.stringify(user)};
+    script(src="/js/game.js")

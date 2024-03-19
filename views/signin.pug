@@ -1,0 +1,18 @@
+extends layout.pug 
+
+block navbar 
+    include navbar.pug
+
+block content
+    div(class="ui middle aligned center aligned grid")
+        div(class="column")
+            h2(class="ui teal header") Sign In
+            form(action="signin", method="POST", class="ui large form")
+                div(class="ui stacked segment")
+                    div(class="field")
+                        div(class="ui left input")
+                            input(type="text", name="username", placeholder="Username")
+                    div(class="field")
+                        div(class="ui left input")
+                            input(type="password", name="password", placeholder="Password")
+                    button(type="submit", class="ui fluid large teal submit button") Sign In

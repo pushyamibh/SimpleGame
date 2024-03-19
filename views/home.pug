@@ -1,0 +1,59 @@
+extends layout.pug
+
+block navbar 
+    include navbar.pug
+
+block content
+    div
+        h1(class="ui header") Welcome to Checkers Game
+
+    div 
+        button(class="ui primary button", id="createGameButton") Create Game
+        
+        div(class="ui hidden divider")
+        
+    div(class="ui modal")
+        div(class="header") Create Game
+
+        div(class="content")
+            div(class="ui middle aligned center aligned grid")
+                div(class="column")
+                    form(action="createGame", method="POST", class="ui form")
+                        div(class="ui stacked segment")
+                            div(class="field")
+                                label(for="color") Play As
+                                select(name="color")
+                                    option(value="white") White
+                                    option(value="black") Black
+                            button(type="submit", class="ui fluid teal submit button") Create Game
+    if games && games.length !== 0
+        div(class="ui middle aligned center aligned grid")
+            table(class="ui celled table")
+                thead 
+                    tr
+                        th Game ID
+                        th White
+                        th Black
+                        th Status
+                        th Action
+                tbody
+                    each game in games
+                        tr
+                            td= game._id.toString()
+                            td= game.players[0] ? game.players[0].username : "Waiting for Player"
+                            td= game.players[1] ? game.players[1].username : "Waiting for Player"
+                            td= game.end ? "Finished" : "In Progress"
+                            if game.end 
+                                td
+                                 a(class="ui button",href="/game/" + game._id.toString()) View
+                            else
+                                td
+                                 a(class="ui button",href="/game/" + game._id.toString()) Join
+                                
+    else
+        div(class="ui middle aligned center aligned grid")
+            div(class="column")
+                h2(class="ui teal header") No Games Available
+
+
+    script(src="js/home.js")

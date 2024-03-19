@@ -1,0 +1,82 @@
+.gameContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.gameBoard {
+    background-color: #000000;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameBoard .row {
+    width: 100%;
+    height: 12.5%;
+    display: flex;
+}
+
+.gameBoard .row .square {
+    width: 12.5%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameBoard .row .square .occupied {
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+}
+
+.gameBoard .row .square .occupied.blackPiece {
+    background-color: black;
+    border: 2px solid white;
+}
+
+.gameBoard .row .square .occupied.whitePiece {
+    background-color: white;
+    border: 2px solid black;
+}
+
+.gameBoard .row .square .occupied.whiteKing {
+    background-color: white;
+    border: 5px solid black;
+}
+
+.gameBoard .row .square .occupied.blackKing {
+    background-color: black;
+    border: 5px solid white;
+}
+
+.gameBoard .row .square.whiteBlock {
+    background-color: #f1cba5;
+}
+
+.gameBoard .row .square.blackBlock {
+    background-color: #956332;
+}
+
+.occupied {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.occupied.whitePiece {
+    background-color: white;
+}
+
+.occupied.blackPiece {
+    background-color: black;
+}
